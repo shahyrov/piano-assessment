@@ -1,0 +1,41 @@
+<div class="searchResultContainer">
+
+  <div class="title">Results for search term: <i>'{{searchTerm$ | async}}'</i></div>
+
+  <div class="noResult" *ngIf="!(posts$ | async).length">No Result</div>
+
+  <div class="tableWrapper"*ngIf="(posts$ | async).length">
+    <table mat-table [dataSource]="posts$ | async" >
+      <!-- Author Column -->
+      <ng-container matColumnDef="author">
+        <th mat-header-cell *matHeaderCellDef> Author </th>
+        <td mat-cell *matCellDef="let element"><a class="aLink" (click)="onAuthorClick(element.owner.user_id)">{{element.owner.display_name}}</a> </td>
+      </ng-container>
+
+      <!-- Topic Column -->
+      <ng-container matColumnDef="topic">
+        <th mat-header-cell *matHeaderCellDef> Topic </th>
+        <td mat-cell *matCellDef="let element"> <a class="aLink" (click)="onQuestionDetail(element.question_id)">{{element.title}}</a> </td>
+      </ng-container>
+
+      <!-- Answer Count Column -->
+      <ng-container matColumnDef="qtyAnswers">
+        <th mat-header-cell *matHeaderCellDef> Num of answers </th>
+        <td mat-cell *matCellDef="let element"> <a class="aLink" (click)="onQuestionDetail(element.question_id)">{{element.answer_count}}</a> </td>
+      </ng-container>
+
+      <!-- Tags Column -->
+      <ng-container matColumnDef="tags">
+        <th mat-header-cell *matHeaderCellDef> Tags </th>
+        <td mat-cell *matCellDef="let element">
+          <mat-chip-list aria-label="Fish selection">
+              <mat-chip *ngFor="let tag of element.tags">{{tag}}</mat-chip>
+          </mat-chip-list>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</div>

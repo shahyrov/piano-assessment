@@ -1,0 +1,28 @@
+.searchResultContainer {
+  .title {
+    font-size: 20px;
+    padding-top: 20px;
+    padding-left: 40px;
+  }
+  .noResult {
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+  }
+  .tableWrapper {
+    padding: 30px 40px;
+    table {
+      width: 100%;
+    }
+    table td, table th {
+      padding: 2px 10px;
+    }
+    .aLink {
+      cursor: pointer;
+    }
+    .aLink:hover {
+      color: blue;
+      text-decoration: underline;
+    }
+  }
+}

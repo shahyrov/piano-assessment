@@ -1,0 +1,19 @@
+
+.searchContainer {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.seachForm {
+  display: flex;
+  flex-direction: row;
+  .searchInput {
+    width: 300px;
+  }
+  .searchBtn {
+    padding-top: 10px;
+    padding-left: 10px;
+  }
+}

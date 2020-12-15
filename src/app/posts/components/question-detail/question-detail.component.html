@@ -1,0 +1,54 @@
+<div class="questionContainer">
+
+  <div class="author">
+    <mat-card class="author-card">
+      <mat-card-header>
+        <img mat-card-avatar class="author-image" src="{{quest.owner.profile_image}}">
+        <mat-card-title>{{quest.owner.display_name}}</mat-card-title>
+        <mat-card-subtitle><a target="_blank" href="{{quest.owner.link}}">Open profile in Stackoverflow</a></mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p><b>Question:</b> {{quest.title}}</p>
+        <div><b>Tags:</b> {{quest.tags.join(', ')}}</div>
+      </mat-card-content>
+      <mat-card-actions class="card-footer">
+        <div class="footer-icon">
+          <mat-icon>remove_red_eye</mat-icon>{{quest.view_count}}
+        </div>
+        <div class="footer-icon">
+          <mat-icon>question_answer</mat-icon>{{quest.is_answered ? quest.answer_count : 0}}
+        </div>
+        <div class="footer-icon">
+          <mat-icon>score</mat-icon>{{quest.score}}
+        </div>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <div class="answers-title">
+    <div class="title">
+      <span matBadge="{{quest.answer_count}}" matBadgeOverlap="false">Answers</span>
+    </div>
+    <div class="matspinner">
+      <mat-spinner *ngIf="(isAnswersLoading$ | async)"></mat-spinner>
+    </div>
+  </div>
+
+  <div class="answers" *ngIf="!(isAnswersLoading$ | async)">
+    <mat-card class="answers-card" *ngFor="let answer of answers$ | async">
+      <mat-card-header>
+        <img mat-card-avatar class="answers-image" src="{{answer.owner.profile_image}}">
+        <mat-card-title>{{answer.owner.display_name}}</mat-card-title>
+        <mat-card-subtitle><a target="_blank" href="{{answer.owner.link}}">Open profile in Stackoverflow</a></mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-actions class="card-footer">
+        <div class="footer-icon" *ngIf="answer.is_accepted"><mat-icon>done</mat-icon> Accepted</div>
+        <div class="footer-icon" *ngIf="!answer.is_accepted"><mat-icon>close</mat-icon> Not accepted</div>
+        <div class="footer-icon">
+          <mat-icon>score</mat-icon>{{answer.score}}
+        </div>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+</div>

@@ -1,0 +1,18 @@
+<div class="searchContainer">
+  <form [formGroup]="searchForm" (ngSubmit)="onSearch()" class="seachForm">
+    <mat-form-field class="searchInput">
+      <mat-label>Search term...</mat-label>
+      <input matInput type="text" formControlName="searchTerm">
+      <button mat-button *ngIf="searchForm.get('searchTerm').value" matSuffix mat-icon-button aria-label="Clear" (click)="onClearSearchTerm()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <div class="searchBtn">
+      <button mat-raised-button type="submit" color="primary">Search</button>
+    </div>
+  </form>
+
+  <label *ngIf="isLoading$ | async">Loading...</label>
+
+</div>
